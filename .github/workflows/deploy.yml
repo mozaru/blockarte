@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: deploy.tar.gz
-          target: /server/projetos/blockart
+          target: /server/projetos/blockmarte
 
       - name: Rodar docker-compose no servidor
         uses: appleboy/ssh-action@v1.0.0
@@ -37,7 +37,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /server/projetos/blockart
+            cd /server/projetos/blockmarte
             tar -xzf deploy.tar.gz
             docker compose build
             docker compose up -d

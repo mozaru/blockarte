@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 # Instala o busybox (já vem em Alpine, mas garantimos)
-RUN apk add --no-cache busybox
+RUN apk add --no-cache busybox busybox-extras
 
 # Cria diretório para servir os arquivos
 WORKDIR /www
