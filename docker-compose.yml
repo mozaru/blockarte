@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  blockarte:
+    build: .
+    container_name: blockarte
+    ports:
+      - "8123:80"
+    restart: unless-stopped

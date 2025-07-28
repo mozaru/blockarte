@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Blockmarte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="home-screen" class="screen active">
+    <h1>Blockmarte</h1>
+    <p>Jogo estilo paredão (blockout)</p>
+    <p>Block + Matemática + Arte = Blockmarte</p>
+    <p>Diversão, Arte, Design, Fisica e Matematica se misturam</p>
+    <div class="menu">
+      <button onclick="showScreen('level-select')">Jogar</button>
+      <button onclick="abrirRanking()">Ranking</button>
+      <button onclick="abrirSettings()">Configurações</button>
+      <button onclick="abrirGaleria()">Galeria</button>
+      <button onclick="abrirModalUsuario()">Usuário</button>
+      <button onclick="openModal('modal-about')">Sobre</button>
+      <button onclick="openModal('modal-credits')">Créditos</button>
+    </div>
+    <p>Vida alienígena feita de matemática. <br/>Desmonte padrões.<br/>Descubra formas.</p>
+    </div>
+
+  <div id="level-select" class="screen">
+    <h2>Seleção de Fases</h2>
+    <div class="levels-grid" id="levels-container">
+      <!-- Exemplo de 9 fases + boss -->
+      <button onclick="startGame(1)">Fase 1</button>
+      <button onclick="startGame(2)">Fase 2</button>
+      <button onclick="startGame(3)">Fase 3</button>
+      <button onclick="startGame(4)">Fase 4</button>
+      <button onclick="startGame(5)">Fase 5</button>
+      <button onclick="startGame(6)">Fase 6</button>
+      <button onclick="startGame(7)">Fase 7</button>
+      <button onclick="startGame(8)">Fase 8</button>
+      <button onclick="startGame(9)">Fase 9</button>
+      <button class="boss" onclick="startGame(10)">Boss Final</button>
+    </div>
+    
+
+    <button onclick="showScreen('home-screen')">Voltar</button>
+  </div>
+
+<div id="game-screen" class="screen">
+  <div id="game-ui-status">
+    <p id="status-jogo">Fase 1</p>
+    <p id="placar">Pontuação: 0</p>
+  </div>  
+  <canvas id="game-canvas" width="400" height="400"></canvas>
+  <div id="game-ui-btn">
+    <button id="btnVoltarSelecao" onclick="voltarParaSelecao()">Voltar</button>
+    <button id="btnReiniciar" onclick="reiniciar()">Reiniciar</button>
+    <button id="btnPausar" onclick="pausar()">Pausar</button>
+    <button id="btnAvancar" onclick="proxima()">Avancar</button>
+  </div>
+</div>
+    
+<div id="modal-about" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-about')">&times;</span>
+    <h2>Sobre o Jogo</h2>
+    <p><strong>Blockmarte</strong> é um jogo onde matemática, arte e ficção científica se entrelaçam. Inspirado nos clássicos de quebra-blocos, aqui você não enfrenta apenas estruturas: você interage com <strong>formas de vida matemáticas</strong>, originadas no ambiente alienígena de Marte.
+        </p>
+        <p>
+            Cada fase representa uma entidade viva, gerada por fórmulas que aplicam conceitos como fractais, tesselações, curvas paramétricas e padrões geométricos. O resultado são criaturas simétricas, fluidas e hipnotizantes, que parecem pulsar com vida própria.
+        </p>
+        <p>
+            Você não destrói blocos ao acaso. Você desmonta organismos marcianos, cuidadosamente projetados pela matemática, em uma dança de precisão e estratégia.
+        </p>
+        <p>
+            <strong>Blockmarte</strong> é mais que um jogo — é uma galeria viva de arte generativa, nascida de lógica pura, onde cada fase é uma obra interativa criada por equações.
+        </p>
+  </div>
+</div>
+
+<!-- MODAL: CRÉDITOS -->
+<div id="modal-credits" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-credits')">&times;</span>
+    <h2>Créditos</h2>
+    <div class="credit-entry">
+      <h3>Desenvolvimento</h3>
+      <p>@mozarsilva</p>
+    </div>
+    <div class="credit-entry">
+      <h3>Design Procedural</h3>
+      <p>@yuruyurau</p>
+    </div>
+    <div class="credit-entry">
+      <h3>Ferramentas</h3>
+      <p>HTML, CSS, JavaScript, Canvas API</p>
+    </div>
+    <div class="credit-entry">
+      <h3>Inspiração</h3>
+      <p>Arte generativa, fractais, vida microscópica, sci-fi retrô</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: SELECAO DE USUARIO -->
+<div id="modal-usuario" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-usuario')">&times;</span>
+    <h2>Selecionar Usuário</h2>
+    <label for="lista-usuarios">Usuário atual:</label><br/>
+    <select id="lista-usuarios"></select>
+    <br/><br/>
+    <button onclick="confirmarUsuario()">Usar Selecionado</button>
+    <button onclick="openModal('modal-criar-usuario')">Criar Novo Usuário</button>
+  </div>
+</div>
+
+<!-- MODAL: NOVO USUARIO -->
+<div id="modal-criar-usuario" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-criar-usuario')">&times;</span>
+    <h2>Criar Novo Usuário</h2>
+    <input type="text" id="novo-apelido" placeholder="Apelido"><br/>
+    <input type="text" id="novo-nome" placeholder="Nome"><br/>
+    <input type="email" id="novo-email" placeholder="Email (opcional)"><br/><br/>
+    <button onclick="salvarNovoUsuario()">Salvar</button>
+    <button onclick="closeModal('modal-criar-usuario')">Cancelar</button>
+  </div>
+</div>
+
+<!-- MODAL: RANKING -->
+<div id="modal-ranking" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-ranking')">&times;</span>
+    <h2>Top 20 Jogadores</h2>
+      <div style="max-height: 400px; overflow-y: auto; border: 1px solid #00ffcc; border-radius: 6px;">
+        <table id="tabela-ranking" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Apelido</th>
+              <th>Pontos</th>
+              <th>Tempo</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    <br/>
+    <button onclick="closeModal('modal-ranking')">Fechar</button>
+  </div>
+</div>
+
+<!-- MODAL: SETTINGS -->
+<div id="modal-settings" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-settings')">&times;</span>
+    <h2>Configurações</h2>
+
+    <h3>Volume</h3>
+
+    <div>
+      <label for="vol-geral">Geral</label>
+      <button onclick="toggleMute('geral')" id="mute-geral">🔊</button><br/>
+      <input type="range" id="vol-geral" min="0" max="1" step="0.01" oninput="ajustarVolume('geral')"><br/>
+    </div>
+
+    <div>
+      <label for="vol-trilha">Trilha</label>
+      <button onclick="toggleMute('trilha')" id="mute-trilha">🔊</button><br/>
+      <input type="range" id="vol-trilha" min="0" max="1" step="0.01" oninput="ajustarVolume('trilha')"><br/>
+    </div>
+
+    <div>
+      <label for="vol-efeitos">Efeitos</label>
+      <button onclick="toggleMute('efeitos')" id="mute-efeitos">🔊</button><br/>
+      <input type="range" id="vol-efeitos" min="0" max="1" step="0.01" oninput="ajustarVolume('efeitos')"><br/>
+    </div>
+
+    <h3>Dificuldade</h3>
+    <select id="nivel-dificuldade">
+      <option value="easy">Fácil</option>
+      <option value="normal">Normal</option>
+      <option value="hard">Difícil</option>
+    </select>
+
+    <br/><br/>
+    <button onclick="salvarConfiguracoes()">Salvar</button>
+  </div>
+</div>
+
+<!-- MODAL: GALERIA -->
+<div id="modal-galeria" class="modal">
+  <div class="modal-content" style="max-height: 70vh; overflow-y: auto;">
+    <span class="close" onclick="closeModal('modal-galeria')">&times;</span>
+    <h2>Galeria de Criaturas</h2>
+    <div id="galeria-lista" class="galeria-lista"></div>
+    <br/>
+    <button onclick="closeModal('modal-galeria')">Fechar</button>
+  </div>
+</div>
+
+<!-- Modal de detalhes -->
+<div id="modal-detalhe-criatura" class="modal">
+  <div class="modal-content" style="max-width: 800px;">
+    <span class="close" onclick="closeModal('modal-detalhe-criatura')">&times;</span>
+    <h2 id="detalhe-nome"></h2>
+    <p id="detalhe-pontos"></p>
+    <div id="detalhe-descricao"></div> <!-- Adicionado -->
+    <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+      <img id="detalhe-img" src="" alt="Criatura" style="max-width: 200px; width: 150px; margin: auto; border-radius: 8px;">
+      <div id="detalhe-formula" style="font-family: monospace; flex: 1; min-width: 200px;text-align: left;"></div>
+    </div>
+    <br/>
+    <button onclick="closeModal('modal-detalhe-criatura')">Fechar</button>
+  </div>
+</div>
+
+<!-- MODAL: ALERTA -->
+<div id="modal-alerta" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-alerta')">&times;</span>
+    <h2 id="alerta-titulo">Alerta</h2>
+    <p id="alerta-mensagem">Algo aconteceu.</p>
+    <br/>
+    <button onclick="closeModal('modal-alerta')">OK</button>
+  </div>
+</div>
+
+
+
+  <script src="js/settings.js"></script>
+  <script src="js/audioJogo.js"></script>
+  <script src="js/criatura.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/bola.js"></script>
+  <script src="js/raquete.js"></script>
+  <script src="js/input.js"></script>
+  
+  <script src="js/cena.js"></script>
+  <script src="js/cenaCanvas.js"></script>
+</body>
+<!-- Controles Mobile -->
+<div id="mobile-controls" style="display: none; position: fixed; bottom: 10px; width: 100%; justify-content: space-around; z-index: 10;">
+  <button id="btn-left" style="width: 45%; height: 60px; font-size: 24px;">◀</button>
+  <button id="btn-right" style="width: 45%; height: 60px; font-size: 24px;">▶</button>
+</div>
+</html>
+
