@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 # Instala o busybox (já vem em Alpine, mas garantimos)
-RUN apk add --no-cache busybox busybox-extras
+RUN apk add --no-cache busybox-extras
 
 # Cria diretório para servir os arquivos
 WORKDIR /www
@@ -18,4 +18,4 @@ RUN chmod -R 755 /www
 EXPOSE 80
 
 # Inicia o servidor HTTP do busybox em modo foreground
-CMD ["busybox", "httpd", "-f", "-p", "80"]
+CMD ["httpd", "-f", "-p", "80"]

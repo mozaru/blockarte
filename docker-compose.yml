@@ -7,3 +7,9 @@ services:
     ports:
       - "8123:80"
     restart: unless-stopped
+    networks:
+      - proxy-nginx
+
+networks:
+  proxy-nginx:
+    external: true
