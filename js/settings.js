@@ -38,20 +38,14 @@ class Settings {
     };
     this.jogadorCorrente = apelido;
     this.salvar();
-    
-    const data = new URLSearchParams();
-    data.append("apelido", apelido);
-    data.append("nome", nome);
-    data.append("email", email);
-
-    fetch("https://script.google.com/macros/s/AKfycbzdGDWWPsB7VZ651nmOEWUm5SldzIcS6-x-8uvUyjyFISj5y60mvoVyPxDy0O8R-YFR/exec", {
-        method: "POST",
-        body: data,
-    })
-    .then(res => res.text())
-    .then(msg => console.log("Resposta:", msg))
-    .catch(err => console.error("Erro:", err));
+    this.enviarDadosSemCors(apelido, nome, email);
     return true;
+  }
+  enviarDadosSemCors(apelido, nome, email) {
+        document.getElementById("input-apelido").value = apelido;
+        document.getElementById("input-nome").value = nome;
+        document.getElementById("input-email").value = email;
+        document.getElementById("formulario").submit();
   }
   
   setJogadorCorrente(apelido) {
