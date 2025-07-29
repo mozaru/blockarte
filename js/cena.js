@@ -8,7 +8,7 @@ class Cena {
     this.bola = new Bola(200, 200);
     if (settings.dificuldade=="easy")
     {
-      this.bola.raio = 30;
+      this.bola.raio = 20;
       this.bola.velocidade = 2;
       this.raquete.largura = 140;
     }
