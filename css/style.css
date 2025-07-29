@@ -209,23 +209,41 @@ h2 {
 #mobile-controls {
   position: fixed;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  /*left: 50%;
+  transform: translateX(-50%);*/
   display: none;
-  gap: 30px;
+  align-items: center;
+  width: 100vw;
+  gap: 10vw;
+  text-align: center;
+  margin: 0 15vw 5vw 15vw;
+  display: none;
+  flex-direction: row;
 }
 
 #mobile-controls button {
   font-size: 28px;
-  width: 70px;
-  height: 70px;
+  width: 30vw;
+  height: 30vw;
+  margin: 0;
+  padding: 0;
   background-color: rgba(255, 255, 255, 0.1);
   border: 2px solid #00ffcc;
-  border-radius: 12px;
+  border-radius: 50%;
   color: #00ffcc;
   font-family: 'Orbitron', sans-serif;
+  user-select: none;          /* Evita seleção de texto */
+  -webkit-user-select: none;  /* Suporte para Safari/Chrome */
+  -ms-user-select: none;      /* Suporte para Edge antigo */
+  touch-action: manipulation; /* Remove delay no touch em alguns browsers */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-drag: none;  
 }
-
+.arrow-icon {
+  width: 80%;
+  height: 80%;
+  
+}
 #game-screen {
   flex-direction: column;
   align-items: center;

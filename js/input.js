@@ -39,9 +39,10 @@ class Input {
     toggle(rightBtn, 'direita', true);
 
     // Detectar se é mobile e mostrar controles
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
+    if (/Mobi|Android/i.test(navigator.userAgent))
       document.getElementById('mobile-controls').style.display = 'flex';
-    }
+    else
+      document.getElementById('mobile-controls').style.display = 'none';
   }
 
   update() {

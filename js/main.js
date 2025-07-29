@@ -1,6 +1,7 @@
 let currentScreen=null;
 function showScreen(screenId) {
   audio.tocarTrilha("Menu");
+  document.getElementById('mobile-controls').style.display = 'none';
   document.querySelectorAll('.screen').forEach(screen => {
     screen.classList.remove('active');
   });

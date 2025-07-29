@@ -2,6 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blockmarte</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -247,9 +248,17 @@
   <script src="js/cenaCanvas.js"></script>
 </body>
 <!-- Controles Mobile -->
-<div id="mobile-controls" style="display: none; position: fixed; bottom: 10px; width: 100%; justify-content: space-around; z-index: 10;">
-  <button id="btn-left" style="width: 45%; height: 60px; font-size: 24px;">◀</button>
-  <button id="btn-right" style="width: 45%; height: 60px; font-size: 24px;">▶</button>
+<div id="mobile-controls">
+    <button id="btn-left">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="arrow-icon" fill="currentColor">
+            <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+    <button id="btn-right">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="arrow-icon" fill="currentColor">
+            <path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+      </svg>
+    </button>
 </div>
 </html>
 
