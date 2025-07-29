@@ -80,6 +80,9 @@ class Cena {
     }
     
     if (this.estado !== "jogando")
+    {
+      document.getElementById('mobile-controls').style.display = 'none';
       settings.adicionarPlacar(this.estado=="vitoria"?this.fase+1:this.fase, this.pontuacao, this.tempoJogando);
+    }
   }
 }
