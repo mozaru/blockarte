@@ -82,7 +82,7 @@ function generateLevelButtons() {
   const bossLabel = document.createElement("span");
   bossLabel.textContent = "Boss Final";
 
-  if (progresso.unlocked >= TOTAL_FASES) {
+  if (settings.faseLiberada(TOTAL_FASES+1)) {
     bossImg.src = `assets/${FASES[TOTAL_FASES].assets}`;
     bossBtn.onclick = () => startGame(10);
   } else {
@@ -149,7 +149,7 @@ function startGame(fase) {
       gameLoopId = requestAnimationFrame(loop);
     }
     else{
-      btnAvancar.style.display = cena.estado === "vitoria"?"inline-block":"none";
+      btnAvancar.style.display = fase<10 && cena.estado === "vitoria"?"inline-block":"none";
     }
     btnVoltarSelecao.style.display = cena.estado !== "jogando" ?"inline-block":"none";
     btnReiniciar.style.display = cena.estado !== "jogando"?"inline-block":"none";

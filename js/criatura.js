@@ -25,12 +25,20 @@ class CriaturaBase {
     let acertos = 0;
     for (let i = 0; i < this.quantidade; i++) {
       if (this.hit[i]) continue;
-      const dx = this.pontos[i * 2] - bola.x;
-      const dy = this.pontos[i * 2 + 1] - bola.y;
-      if (dx * dx + dy * dy < bola.raio * bola.raio) {
+      if (this.pontos[i*2] == NaN || this.pontos[i*2+1] == NaN||
+          this.pontos[i * 2]<0 || this.pontos[i * 2]>400 || 
+          this.pontos[i * 2+1]<0 || this.pontos[i * 2+1]>400)
+      {
         this.hit[i] = 1;
-        bola.dy *= -1;
         acertos++;
+      } else {
+        const dx = this.pontos[i * 2] - bola.x;
+        const dy = this.pontos[i * 2 + 1] - bola.y;
+        if (dx * dx + dy * dy < bola.raio * bola.raio) {
+          this.hit[i] = 1;
+          bola.dy *= -1;
+          acertos++;
+        }
       }
     }
     return acertos;
