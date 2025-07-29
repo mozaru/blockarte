@@ -134,15 +134,18 @@ h2 {
 .levels-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 30px;
   justify-items: center;
   margin: 20px auto;
   max-width: 800px;
 }
 
 .levels-grid button {
-  width: 100%;
-  height: 10vw;
+    width: 24vw;
+    height: 24vw;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
 }
 
 .levels-grid button.locked {
@@ -184,15 +187,20 @@ h2 {
 }
 
 .level-button img {
-  width: auto;
-  height: 100%;
+  width: 60%;
+  height: auto;
   object-fit: cover;
   border-radius: 4px;
+  margin: auto;
+}
+
+.level-button span {
+  margin: auto;
 }
 
 .boss-button {
   grid-column: 1 / -1;
-  height: 100px;
+  height: 100px !important;
   max-width: 300px;
   font-size: 20px;
   justify-content: center;
