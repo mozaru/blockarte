@@ -225,7 +225,7 @@ h2 {
   font-size: 28px;
   aspect-ratio: 1 / 1;
   width: 100%;
-  max-width: 100px;
+  max-width: 80px;
   /* height: 30vw; */
   margin: 0 auto;
   padding: 0;
@@ -255,8 +255,13 @@ h2 {
 }
 
 #game-canvas {
+  width: 90%;
   border: 2px solid #00ffcc;
   background-color: #000;
+  max-width: 400px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 #game-ui-status, #game-ui-btn{

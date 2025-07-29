@@ -40,7 +40,7 @@ class Input {
 
     // Detectar se é mobile e mostrar controles
     if (/Mobi|Android/i.test(navigator.userAgent))
-      document.getElementById('mobile-controls').style.display = 'flex';
+      document.getElementById('mobile-controls').style.display = 'block';
     else
       document.getElementById('mobile-controls').style.display = 'none';
   }
