@@ -1,0 +1,42 @@
+# Stack de produção — https://blockmarte.11tech.com.br
+# A imagem é gerada no GitHub Actions e publicada no GHCR.
+# Na VPS, o deploy baixa a tag do commit e a marca localmente como `deploy`;
+# o compose nunca acessa o registry (pull_policy: never), então
+# `docker compose up -d` recria o container com a imagem do último deploy.
+# HTTPS: Cloudflare (proxy) -> Traefik da VPS (/server/traefik), pelas labels do `server`.
+
+services:
+  server:
+    image: ${GHCR_IMAGE:-ghcr.io/mozaru/blockarte}:deploy
+    pull_policy: never
+    container_name: blockmarte
+    restart: unless-stopped
+    networks:
+      - proxy
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,noexec,mode=1777
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 64M
+        reservations:
+          cpus: '0.05'
+          memory: 16M
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.blockmarte.rule=Host(`blockmarte.11tech.com.br`)"
+      - "traefik.http.routers.blockmarte.entrypoints=websecure"
+      - "traefik.http.routers.blockmarte.tls=true"
+      - "traefik.http.services.blockmarte.loadbalancer.server.port=8080"
+
+networks:
+  proxy:
+    external: true
+    name: proxy   # rede do Traefik (/server/traefik)

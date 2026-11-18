@@ -1,0 +1,6 @@
+# Segredos e estado local (nunca versionar)
+.vps_chave_ssh*
+.env
+.env.*
+!.env.example
+deploy.tar.gz
